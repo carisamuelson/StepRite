@@ -1,69 +1,76 @@
-<table class="tables">
-<tr class="patient">
-	<th class="patient">Name</strong></th>
-	<th class="patient">MRN</th>
-	<th class="patient">Height</strong></th>
-	<th class="patient">Weight</strong></th>
-	<th class="patient">Doctor</th>
-	<th class="patient"></th>
-</tr>	
+<div class="grids">
+	<div class="row">
+		<div>Name</strong></div>
+		<div>MRN</div>
+		<div>Height</strong></div>
+		<div>Weight</strong></div>
+		<div>Doctor</div>
+		<div></div>
+	</div>	
 <?php foreach($patients->result_array() as $row) { ?>	 
-		<tr class="patient">
-			<td class="patient"><?php echo $row['last_name'] . ", " . $row['first_name']; ?></td>
-			<td class="patient"><?php echo $row['mrn']; ?></td>
-			<td class="patient"><?php echo $row['height']; ?></td>
-			<td class="patient"><?php echo $row['weight']; ?></td>
-			<td class="patient"><?php echo $row['dr']; ?></td>
-			<td class="patient"><a class="edit-patient">Edit Patient</a></td>
-		</tr>
+	<div class="row">
+		<div><?php echo $row['last_name'] . ", " . $row['first_name']; ?></div>
+		<div><?php echo $row['mrn']; ?></div>
+		<div><?php echo $row['height']; ?></div>
+		<div><?php echo $row['weight']; ?></div>
+		<div><?php echo $row['dr']; ?></div>
+		<div><a class="toggle-edit anchor" id="<?php echo $row['user_id']; ?>">Edit Patient</a></div>
+	</div>
+	
+	<div class="edit-form <?php echo $row['user_id']; ?> ui-corner-bottom">
+		<div class="form-elements<?php echo $row['user_id']; ?>">
+			<?php echo form_open('dashboard/patients/edit', array('class' => 'edit' . $row['user_id'])); ?>
+				<strong>Extend Patient Treatment Date</strong><br/><br/>
+				<Treatment Start Date: <?php echo $row['start_date']; ?> <br/><br/>
+				Initial Treatment End Date: <?php echo $row['end_date']; ?><br/><br/>
+				Select a date to extend treatment to: <input type="text" name="extended_date" class="extended_date" size="10" value="<?php echo set_value('extended_date'); ?>" /> Format: YYYY-MM-DD <br/><br/> 
+				The Treatment End Date for this patient is <strong><?php echo floor((strtotime($row['end_date']) - time()) / 86400); ?></strong> days away.<br/><br/>
+				
+				<input type="hidden" name="id" value="<?php echo $row['user_id'] ?>"/>
+				<a class="update button" id="<?php echo $row['user_id'];?>">Update Patient</a>
+				
+			<?php echo form_close(); ?>
+		</div>
+		
+		<div class="form-buttons" style="padding: 20px; text-align: center">
+			<a class="toggle-edit anchor" id="<?php echo $row['user_id']; ?>">Close this window</a>
+		</div>
+	</div>
 <?php } ?>
-</table>
-
-<div id="edit-dialog" title="Create new user">
-	<?php echo form_open('dashboard/patients/edit', array('id' => 'edit-form')); ?>
-		<strong>Extend Patient Treatment Date</strong>
-		Treatment Start Date: <?php echo $patient['start_date']; ?> <br/>
-		Initial Treatment End Date: <?php echo $patient['end_date']; ?><br/>
-		Treatment End Date Extension	:	2014-01-16 (as of 2013-12-31 22:51:19)
-		The Treatment End Date for this patient is 11 days away.
-	<?php echo form_close(); ?>
 </div>
 
 <script><!--
 $(document).ready(function() {
-	// Styling for the patient table
-	$("tr:even").css( "background-color", "#E9E9E9" );
-	$("tr").css( "border-top", "1px solid #000000" );
-	$("tr.patient:last").css( "border-bottom", "1px solid #000000" );
-
-	// Edit Patient Dialog Popup
-	$( ".edit-patient" ).click(function() {
-		$(" #edit-dialog" ).dialog({ show: 'fade' });
-		$( "#edit-dialog" ).dialog( "open" ).fadeIn(1000);
-		$(".ui-dialog-titlebar").hide();
+	// initially hide the edit patient form for each patient
+	$(".edit-form").hide();
+	// toggle the hidden edit patient form on and off
+	$(".toggle-edit").click(function() {
+		var id = $(this).attr('id');
+		$('.edit-form.' + id).toggle( "slow", function() {});
 	});
-	  
-	$( "#edit-dialog" ).dialog({
-		autoOpen: false,
-		resizable: false,
-		height: 500,
-		width: 300,
-		modal: true,
-		buttons: {
-			"Update Patient": function() {
-				$.ajax({
-					type: "POST",
-					url: "<?php echo base_url() . "dashboard/patients/edit" ?>",
-					data: $("#edit-form").serialize(),
-					success: function(data) {
-						$( "#edit-dialog" ).html(data);
-					}
-				});
+	// Update function
+	$('.update').click(function() {
+		var id = $(this).attr('id');
+		$.ajax({
+			type: "POST",
+			url: "<?php echo base_url() . "dashboard/patients/edit" ?>",
+			data: $('.edit' + id).serialize(),
+			success: function(data) {
+				if(data == "error") {
+					$( '.form-elements' + id ).append("<br /><br /><span class=\"error\">A valid date is required</span>");
+				}
+				else {
+					$( '.form-elements' + id ).html(data);
+				}
 			},
-			Cancel: function() {
-			  $( this ).dialog( "close" );
+			error: function(data) {
+				$( '.form-elements' + id ).append("<span class=\"error\">Unable to update the patient</span>")
 			}
-		},
-    });
+		});
+	});
+	// DatePicker
+	$('.extended_date').each(function(){
+		$(this).datepicker({ dateFormat: 'yy-mm-dd' });
+});
 });
 </script>

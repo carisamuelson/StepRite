@@ -18,7 +18,6 @@ class patients extends Custom_Controller {
 	public function index() {
 		$data['patients'] = $this->user_model->get_patients($this->session->userdata('user_id'));
 		$data['patient'] = $this->user_model->get_patient_by_id($this->session->userdata('patient_id'));
-		
 		/************************/
 		/*    Load File View    */
 		/************************/
@@ -26,6 +25,16 @@ class patients extends Custom_Controller {
 	}
 	
 	public function edit() {
-		echo "success";
+	
+		$this->form_validation->set_rules('extended_date', "extended_date", 'required|valid_date');
+		
+		if(!$this->form_validation->run()) {
+			echo "error";
+		} 
+		else {
+			echo "You've successfully updated your patient with id = " . $this->input->post('id');
+			echo "<br/><br/>";
+			echo "If you would like to update this patient again, you must refresh the page";
+		}
 	}
 }

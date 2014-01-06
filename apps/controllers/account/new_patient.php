@@ -66,7 +66,7 @@ class New_patient extends Custom_Controller {
 			/*    Load File View    */
 			/************************/
 			$this->session->set_userdata('notice', 'Thank you for registering your new patient. We will validate the information provided before the patient is activated');
-			redirect('dashboard/view_patients', 'refresh');
+			redirect('account/account', 'refresh');
 		}
 		else {
 			/************************/

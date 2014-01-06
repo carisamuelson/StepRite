@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2014 at 02:30 AM
--- Server version: 5.5.34
--- PHP Version: 5.4.22
+-- Generation Time: Jan 06, 2014 at 09:45 AM
+-- Server version: 5.6.14
+-- PHP Version: 5.5.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -654,7 +654,7 @@ INSERT INTO `custom_exercises` (`id`, `exercise_id`, `reps`, `hold_time`, `weigh
 
 CREATE TABLE IF NOT EXISTS `exercises` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '1 = gait, 2 = force, 3 = rom',
   `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
@@ -1259,50 +1259,20 @@ INSERT INTO `injurytypes` (`id`, `name`, `category`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `notes` (
-  `ClientID` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `patient_id` int(11) DEFAULT NULL,
   `Date` datetime DEFAULT NULL,
   `Subject` varchar(30) DEFAULT NULL,
-  `Note` varchar(255) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `Note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `notes`
 --
 
-INSERT INTO `notes` (`ClientID`, `Date`, `Subject`, `Note`) VALUES
-(1, '2012-02-15 00:00:00', 'This is a SOAP Note', 'SOAP Notes are really cool and useful for doctors!  I''m writing this one to test them on our dashboard!'),
-(1, '2012-02-15 00:00:00', 'Exercise Added', 'Today I added another exercise to the patients protocol.  This exercise should help improve flexibility.'),
-(1, '2012-02-15 13:19:25', 'Hello World!', 'This is a new note!'),
-(1, '2012-02-15 13:19:58', 'More notes!', 'More notes is better than fewer notes!'),
-(1, '2012-02-15 13:20:16', 'One Note', 'One note is better than no notes at all!'),
-(2, '2012-02-15 13:21:52', 'First Appointment', 'In my first appointment with John Deer I assigned him 3 new exercises and showed him how they are done.'),
-(1, '2012-02-15 14:14:58', '349m 29!!', '[{#}3km4 m3;iau4 k32k'),
-(1, '2012-02-16 09:55:04', '''(SELECT Subject FROM Notes)''', 'Hello'),
-(1, '2012-03-01 14:05:22', 'Added Exercises', 'Today I was in a meeting with whoever and added an exercise.'),
-(23, '2012-05-21 15:30:05', 'First Appointment', 'lskdjfkjwekj'),
-(23, '2012-05-21 15:31:00', 'Next Visit', 'more notes'),
-(27, '2012-05-21 20:10:15', 'First Appointment', 'I had my first appointment with Bruce Lee.'),
-(64, '2012-07-17 15:30:43', 'first note', 'making a note for myself'),
-(66, '2012-07-17 22:33:19', 'First Meeting', 'I assigned two exercises to the patient.'),
-(1, '2013-11-06 20:44:21', '1', '1'),
-(0, '2013-11-06 20:44:21', '', ''),
-(6, '2013-11-06 20:48:39', '1', '1'),
-(7, '2013-11-06 20:48:39', '1', '1'),
-(6, '2013-11-06 20:48:39', '1', '1'),
-(7, '2013-11-06 20:48:39', '1', '1'),
-(0, '2013-11-06 22:09:17', '', ''),
-(1, '2013-11-06 22:09:17', '1', '1'),
-(6, '2013-11-06 22:44:58', '1', '1'),
-(7, '2013-11-06 22:44:58', '1', '1'),
-(6, '2013-11-06 22:44:58', '1', '1'),
-(7, '2013-11-06 22:44:58', '1', '1'),
-(6, '2013-11-06 22:45:36', '1', '1'),
-(7, '2013-11-06 22:45:36', '1', '1'),
-(6, '2013-11-06 22:45:37', '1', '1'),
-(7, '2013-11-06 22:45:37', '1', '1'),
-(0, '2013-11-06 22:46:51', '', ''),
-(0, '2013-11-06 22:46:51', '1', '1'),
-(1, '2013-12-10 20:54:12', 'test1', 'test2');
+INSERT INTO `notes` (`id`, `patient_id`, `Date`, `Subject`, `Note`) VALUES
+(1, 1, '2012-02-15 00:00:00', 'This is a SOAP Note', 'SOAP Notes are really cool and useful for doctors!  I''m writing this one to test them on our dashboard!');
 
 -- --------------------------------------------------------
 
@@ -1312,38 +1282,22 @@ INSERT INTO `notes` (`ClientID`, `Date`, `Subject`, `Note`) VALUES
 
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `message` varchar(500) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `time` time DEFAULT NULL,
-  `new` tinyint(1) DEFAULT NULL,
   `doctor_id` mediumint(9) DEFAULT NULL,
-  `type` mediumint(9) DEFAULT NULL,
+  `datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `read` tinyint(1) DEFAULT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  `message` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `notifications`
 --
 
-INSERT INTO `notifications` (`id`, `message`, `date`, `time`, `new`, `doctor_id`, `type`) VALUES
-(69, 'This is a warning message', '2012-05-24', '19:04:24', 0, 6, 1),
-(70, 'This is a warning message', '2012-05-24', '19:04:24', 0, 6, 2),
-(71, 'This is a warning message', '2012-05-24', '19:04:24', 0, 6, 2),
-(72, 'This is a warning message', '2012-05-24', '19:04:24', 0, 6, 2),
-(73, 'This is a warning message', '2012-05-24', '19:04:25', 0, 6, 2),
-(74, 'This is a warning message', '2012-05-24', '19:04:35', 0, 6, 2),
-(75, 'This is a warning message', '2012-05-24', '19:04:39', 0, 6, 2),
-(76, 'This is a warning message', '2012-05-24', '20:36:32', 0, 6, 0),
-(77, 'This is a warning message', '2012-05-24', '20:48:22', 0, 6, 0),
-(78, 'New Message', '2012-05-25', '15:58:47', 0, 6, 0),
-(79, 'New Message', '2012-05-25', '15:59:22', 0, 6, 0),
-(80, 'New Message', '2012-05-25', '15:59:22', 0, 6, 0),
-(81, 'New Message', '2012-05-25', '15:59:23', 0, 6, 0),
-(82, 'New Message', '2012-05-25', '15:59:23', 0, 6, 0),
-(83, 'New Message', '2012-05-25', '15:59:23', 0, 6, 0),
-(84, 'New Message', '2012-05-25', '15:59:24', 0, 6, 0),
-(85, 'New Message', '2012-05-25', '15:59:24', 0, 6, 0),
-(86, 'New Message', '2012-05-25', '15:59:24', 0, 6, 0);
+INSERT INTO `notifications` (`id`, `doctor_id`, `datetime`, `read`, `type`, `message`) VALUES
+(1, 59, '2014-01-04 22:04:56', 0, 0, 'This is a normal message'),
+(2, 59, '2014-01-01 00:00:00', 0, 1, 'This is a warning message'),
+(3, 59, '2014-01-04 22:05:04', 1, 0, 'This is a normal message');
 
 -- --------------------------------------------------------
 
@@ -1357,6 +1311,7 @@ CREATE TABLE IF NOT EXISTS `patients` (
   `mrn` varchar(32) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
+  `extended` tinyint(1) NOT NULL DEFAULT '0',
   `reg_date` date DEFAULT NULL,
   `processed_date` date DEFAULT NULL,
   `weight` mediumint(9) DEFAULT NULL,
@@ -1380,8 +1335,12 @@ CREATE TABLE IF NOT EXISTS `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`user_id`, `provider_id`, `mrn`, `start_date`, `end_date`, `reg_date`, `processed_date`, `weight`, `height`, `pt`, `dr`, `injured_leg`, `times`, `phone_num`, `status_treatment`, `form_id`, `aob_accepted`, `ctt_accepted`, `pfp_accepted`) VALUES
-(62, 59, '123456789', '2014-01-01', '2014-03-14', '2014-01-03', NULL, 200, '72', '', 'Mike Jones', 0, 3, '555555555', NULL, 0, NULL, NULL, NULL);
+INSERT INTO `patients` (`user_id`, `provider_id`, `mrn`, `start_date`, `end_date`, `extended`, `reg_date`, `processed_date`, `weight`, `height`, `pt`, `dr`, `injured_leg`, `times`, `phone_num`, `status_treatment`, `form_id`, `aob_accepted`, `ctt_accepted`, `pfp_accepted`) VALUES
+(62, 59, '123456789', '2014-01-01', '2014-03-14', 0, '2014-01-03', NULL, 200, '72', '', 'Mike Jones', 0, 3, '555555555', NULL, 0, NULL, NULL, NULL),
+(63, 59, '123456001', '2014-01-02', '2014-04-01', 0, '2014-01-05', NULL, 185, '69', 'Habil', 'Zod', 0, 3, '555555555', NULL, 0, NULL, NULL, NULL),
+(64, 59, '123456001', '2013-12-09', '2014-05-08', 0, '2014-01-05', NULL, 155, '67', 'Rehab Guy', 'Zoidberg', 0, 8, '555555555', NULL, 0, NULL, NULL, NULL),
+(65, 59, '987654321', '2014-01-01', '2014-01-16', 0, '2014-01-06', NULL, 145, '62', 'S.T.A.R.S', 'Jack Kevorkian', 0, 1, '555555555', NULL, 0, NULL, NULL, NULL),
+(66, 59, '123123123', '2014-01-01', '2014-08-01', 0, '2014-01-06', NULL, 210, '74', 'John D Rockefeller', 'Andrew Carnegie', 0, 5, '555555555', NULL, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1600,7 +1559,8 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('a310ff7d63cf98feebd4a89994490bf9', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1388788182, 'a:7:{s:9:"user_data";s:0:"";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";s:16:"selected_patient";s:2:"62";}');
+('8c817e607992c98529b556f22266d1e9', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1388997150, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:20:"dashboard/dashboards";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}'),
+('c8d1dbb250716752be4368a0305cefb3', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 1388997792, 'a:7:{s:9:"user_data";s:0:"";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";s:10:"patient_id";s:2:"62";}');
 
 -- --------------------------------------------------------
 
@@ -1679,7 +1639,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `active` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=63 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
 --
 -- Dumping data for table `users`
@@ -1687,7 +1647,11 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `type`, `first_name`, `last_name`, `password`, `email`, `active`) VALUES
 (59, 1, 'Matthew', 'Stephens', 'i2i4+/gvXJKPAxBFvLaq8zcnuy+JJJ9/', 'mcstephens@gmail.com', 1),
-(62, 2, 'Billy', 'Bob', 'bMriH7E3WWIQeSTqml7Y0XoEh6xshSvY', 'billybob@web.com', 1);
+(62, 2, 'Billy', 'Bob', 'bMriH7E3WWIQeSTqml7Y0XoEh6xshSvY', 'billybob@web.com', 1),
+(63, 2, 'Jane', 'Doe', 'NOnagN2E43tlLhHES9EnYQ==', 'jane@doe.com', 1),
+(64, 2, 'Ada', 'Lovelace', 'GM+ArjVdSvyhByv4P3PitA==', 'ada@lovelace.com', 1),
+(65, 2, 'Linus', 'Torvolds', 'OZYp5tg41ykd1/jdv2XG5Q==', 'linus@torvolds.com', 0),
+(66, 2, 'Herman', 'Hollerith', 'U5QmeyKZIfftn6p9Q58Vmw==', 'herman@hollerith.com', 0);
 
 -- --------------------------------------------------------
 

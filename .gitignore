@@ -1,0 +1,9 @@
+.DS_Store
+
+apps/cache/*
+!apps/cache/index.html
+!apps/cache/.htaccess
+
+apps/logs/*
+!apps/logs/index.html
+!apps/logs/.htaccess

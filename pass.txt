@@ -1,0 +1,13 @@
+StepRite IP 107.21.206.109
+
+Provider Login
+1234567
+tempPW
+
+Patient Login
+JDoe1@website.com
+Password
+
+CallCenter Login
+1
+Password

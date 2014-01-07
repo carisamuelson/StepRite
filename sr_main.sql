@@ -1,31 +1,13 @@
--- phpMyAdmin SQL Dump
--- version 4.0.9
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Jan 06, 2014 at 09:45 AM
--- Server version: 5.6.14
--- PHP Version: 5.5.6
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `sr_main`
---
 
--- --------------------------------------------------------
-
---
--- Table structure for table `activities`
---
-
+DROP TABLE IF EXISTS `activities`;
 CREATE TABLE IF NOT EXISTS `activities` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT COMMENT 'AI Key',
   `patient_id` mediumint(9) DEFAULT NULL,
@@ -37,18 +19,12 @@ CREATE TABLE IF NOT EXISTS `activities` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=549 ;
 
---
--- Dumping data for table `activities`
---
-
 INSERT INTO `activities` (`id`, `patient_id`, `protocol_id`, `exercise_id`, `date_time`, `left_calc`, `right_calc`) VALUES
 (4, 1, 2, 1, '0000-00-00 00:00:00', 3, 4),
-(5, 1, 2, 1, '0000-00-00 00:00:00', 5, 6),
 (6, 1, 4, 2, '0000-00-00 00:00:00', NULL, NULL),
 (10, 1, 1, 70, '0000-00-00 00:00:00', 117, 118),
 (9, 1, 1, 70, '0000-00-00 00:00:00', 115, 116),
 (11, 1, 1, 70, '0000-00-00 00:00:00', 119, 120),
-(14, 1, 2, 1, '0000-00-00 00:00:00', 7, 8),
 (142, 5, 29, 78, '0000-00-00 00:00:00', NULL, NULL),
 (141, 5, 27, 37, '0000-00-00 00:00:00', 137, 138),
 (140, 5, 28, 39, '0000-00-00 00:00:00', 135, 136),
@@ -444,12 +420,7 @@ INSERT INTO `activities` (`id`, `patient_id`, `protocol_id`, `exercise_id`, `dat
 (547, 245, 0, 37, '0000-00-00 00:00:00', 730, 731),
 (548, 245, 0, 37, '0000-00-00 00:00:00', 732, 733);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `admin`
---
-
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8_bin NOT NULL,
@@ -461,39 +432,21 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
---
--- Dumping data for table `admin`
---
-
 INSERT INTO `admin` (`id`, `username`, `first_name`, `last_name`, `password`, `email`, `type`) VALUES
 (3, 'mcstephens', 'Matthew', 'Stephens', '8M7eqtCIQpTXMHidxpMIsC5Z7KlzKpyc', 'mcstephens@gmail.com', 1),
 (4, 'mgray', 'Mark', 'Gray', 'awJ4X+PbPhn9c0/fV5Bns+4xkqRYT4wX', 'mgray15@angelo.edu', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_types`
---
-
+DROP TABLE IF EXISTS `admin_types`;
 CREATE TABLE IF NOT EXISTS `admin_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
 
---
--- Dumping data for table `admin_types`
---
-
 INSERT INTO `admin_types` (`id`, `type`) VALUES
 (1, 'administrator');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `articles`
---
-
+DROP TABLE IF EXISTS `articles`;
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -501,10 +454,6 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `entry_date` varchar(64) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
-
---
--- Dumping data for table `articles`
---
 
 INSERT INTO `articles` (`id`, `name`, `article`, `entry_date`) VALUES
 (1, 'Article 1', '<p>Fusce sollicitudin lobortis enim, vitae tempus libero lobortis nec. Quisque sit amet porta massa. Phasellus sed\nante ac nibh laoreet tincidunt a in mauris. Donec sit amet enim elementum, volutpat diam at, luctus dolor. Donec \nconvallis mollis pulvinar. Nunc egestas enim leo, ut tempus neque elementum sit amet. Donec elementum condimentum \nipsum, eget facilisis metus facilisis vitae. .</p>', '2013-12-22'),
@@ -517,12 +466,7 @@ INSERT INTO `articles` (`id`, `name`, `article`, `entry_date`) VALUES
 (8, 'Star Telegram (Sandra Baker)', '<p><a href="http://107.21.206.109/press/PR_Award_07052010.pdf" target="_blank">Award is step in the right direction for inventors of leg-rehab device</a></p>\r\n', '2013-12-27'),
 (9, 'dBusinessNews', '<p><a href="http://107.21.206.109/press/PR_MostPromising_06292010.pdf" target="_blank">Rice Alliance recognizes MedHab as &#39;Most Promising&#39;</a></p>\r\n', '2013-12-27');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `authlock`
---
-
+DROP TABLE IF EXISTS `authlock`;
 CREATE TABLE IF NOT EXISTS `authlock` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -531,29 +475,16 @@ CREATE TABLE IF NOT EXISTS `authlock` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
---
--- Dumping data for table `authlock`
---
-
 INSERT INTO `authlock` (`id`, `user_id`, `timestamp`) VALUES
 (20, 1, '2012-08-01 22:30:45');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `authlock_log`
---
-
+DROP TABLE IF EXISTS `authlock_log`;
 CREATE TABLE IF NOT EXISTS `authlock_log` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` mediumint(9) NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `authlock_log`
---
 
 INSERT INTO `authlock_log` (`id`, `user_id`, `timestamp`) VALUES
 (1, 0, '2012-08-01 22:02:26'),
@@ -564,12 +495,7 @@ INSERT INTO `authlock_log` (`id`, `user_id`, `timestamp`) VALUES
 (6, 0, '2013-05-25 00:34:43'),
 (7, 0, '2013-07-19 02:11:41');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `coefficients`
---
-
+DROP TABLE IF EXISTS `coefficients`;
 CREATE TABLE IF NOT EXISTS `coefficients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `serial_number` int(11) DEFAULT NULL,
@@ -611,47 +537,7 @@ CREATE TABLE IF NOT EXISTS `coefficients` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `custom_exercises`
---
-
-CREATE TABLE IF NOT EXISTS `custom_exercises` (
-  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `exercise_id` mediumint(9) NOT NULL,
-  `reps` mediumint(9) NOT NULL,
-  `hold_time` int(11) DEFAULT NULL COMMENT 'seconds to hold a ROM exercise',
-  `weight` int(11) DEFAULT NULL COMMENT 'Max weight bearing percent',
-  PRIMARY KEY (`id`),
-  KEY `ExId` (`exercise_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=39 ;
-
---
--- Dumping data for table `custom_exercises`
---
-
-INSERT INTO `custom_exercises` (`id`, `exercise_id`, `reps`, `hold_time`, `weight`) VALUES
-(1, 70, 10, 5, 50),
-(2, 1, 1, 5, 50),
-(3, 4, 10, 5, 50),
-(4, 2, 1, 3, 50),
-(29, 78, 10, 5, 50),
-(28, 39, 10, 5, 50),
-(27, 37, 10, 5, 50),
-(26, 15, 10, 5, 50),
-(25, 6, 10, 5, 50),
-(24, 17, 10, 5, 50),
-(30, 23, 10, 5, 50),
-(38, 24, 10, 5, 50),
-(37, 25, 10, 5, 50);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `exercises`
---
-
+DROP TABLE IF EXISTS `exercises`;
 CREATE TABLE IF NOT EXISTS `exercises` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `type` char(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '1 = gait, 2 = force, 3 = rom',
@@ -668,10 +554,6 @@ CREATE TABLE IF NOT EXISTS `exercises` (
   `secondary_dashboard` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=130 ;
-
---
--- Dumping data for table `exercises`
---
 
 INSERT INTO `exercises` (`id`, `type`, `description`, `name`, `url`, `image`, `db_img`, `start_degrees`, `anticlockwise`, `joint`, `isometric`, `primary_dashboard`, `secondary_dashboard`) VALUES
 (1, '2', 'Stand in place as still as possible.  Do this for the hold time recommended by your provider.', 'Standing', NULL, 'images/exercise_img_1.png', 'dashboard_rom/images/images-rom/129_db.png', 90, 0, NULL, 0, 1, 0),
@@ -800,33 +682,19 @@ INSERT INTO `exercises` (`id`, `type`, `description`, `name`, `url`, `image`, `d
 (128, '3', 'Lying on your side supporting yourself with your left arm, raise your hips up off the ground and hold for ___ seconds.  Repeat on other side.', 'Side Lying Plank', 'OmNGBZzP9Cw', 'images/usc_exercise.png', 'dashboard_rom/images/images-rom/128_db.png', 0, 1, 'AKH', 0, 1, 2),
 (129, '3', 'Place right leg on stool or step, twist your body and step up lifting your left leg and holding for ___ seconds. Repeat on the other foot.', 'Transverse Step Up', 'nFzzaCmgyKI', 'images/usc_exercise.png', 'dashboard_rom/images/images-rom/129_db.png', 0, 1, 'AKH', 0, 1, 2);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `exercise_types`
---
-
+DROP TABLE IF EXISTS `exercise_types`;
 CREATE TABLE IF NOT EXISTS `exercise_types` (
   `id` smallint(2) NOT NULL,
   `name` char(5) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `exercise_types`
---
-
 INSERT INTO `exercise_types` (`id`, `name`) VALUES
 (1, 'gait'),
 (2, 'force'),
 (3, 'rom');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `extended_dates`
---
-
+DROP TABLE IF EXISTS `extended_dates`;
 CREATE TABLE IF NOT EXISTS `extended_dates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` int(11) NOT NULL,
@@ -835,10 +703,6 @@ CREATE TABLE IF NOT EXISTS `extended_dates` (
   `extended_when` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=56 ;
-
---
--- Dumping data for table `extended_dates`
---
 
 INSERT INTO `extended_dates` (`id`, `patient_id`, `extended_from`, `extended_to`, `extended_when`) VALUES
 (1, 12, '2012-06-14', '2012-07-14', '2012-06-27 00:00:00'),
@@ -896,12 +760,7 @@ INSERT INTO `extended_dates` (`id`, `patient_id`, `extended_from`, `extended_to`
 (54, 0, '0000-00-00', '0000-00-00', '2013-11-06 23:06:00'),
 (55, 23170, '2013-12-18', '2013-12-20', '2013-12-11 19:29:00');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forcecalculations`
---
-
+DROP TABLE IF EXISTS `forcecalculations`;
 CREATE TABLE IF NOT EXISTS `forcecalculations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `average` double DEFAULT NULL,
@@ -916,10 +775,6 @@ CREATE TABLE IF NOT EXISTS `forcecalculations` (
   `force4` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=112 ;
-
---
--- Dumping data for table `forcecalculations`
---
 
 INSERT INTO `forcecalculations` (`id`, `average`, `min`, `max`, `over_max`, `under_min`, `time`, `force1`, `force2`, `force3`, `force4`) VALUES
 (1, 10, 11, 12, 13, 14, 15, 1.6, 1.7, 1.8, 1.9),
@@ -1034,12 +889,7 @@ INSERT INTO `forcecalculations` (`id`, `average`, `min`, `max`, `over_max`, `und
 (110, 49.6929, 42.8571, 63.6364, 53, 0, 116, 14.1979, 15.9005, 11.3318, 12.9508),
 (111, 41.6864, 36.3636, 57.1429, 53, 0, 116, 14.6393, 12.3838, 9.04298, 9.55292);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forms`
---
-
+DROP TABLE IF EXISTS `forms`;
 CREATE TABLE IF NOT EXISTS `forms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `aob1` tinyint(1) DEFAULT NULL,
@@ -1057,10 +907,6 @@ CREATE TABLE IF NOT EXISTS `forms` (
   `pfp_rel` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
-
---
--- Dumping data for table `forms`
---
 
 INSERT INTO `forms` (`id`, `aob1`, `aob2`, `aob3`, `aob4`, `aob5`, `aob6`, `insurance`, `ctt_prov`, `ctt_date`, `ctt1`, `pfp_name`, `pfp_rep`, `pfp_rel`) VALUES
 (3, 1, 1, 1, 1, 1, 1, 'MG Insurance Co.', 'Mathew Gray', '10-04-2012', 1, 'Ariel Buck', '', ''),
@@ -1082,12 +928,7 @@ INSERT INTO `forms` (`id`, `aob1`, `aob2`, `aob3`, `aob4`, `aob5`, `aob6`, `insu
 (19, 1, 1, 1, 1, 1, 1, 'vbnm', 'cake', 'cake', 1, 'cake', 'cake', 'cake'),
 (20, 1, 1, 1, 1, 1, 1, 'thing', 'thing', 'thing', 1, 'thing', 'thing', 'thing');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `gaitcalculations`
---
-
+DROP TABLE IF EXISTS `gaitcalculations`;
 CREATE TABLE IF NOT EXISTS `gaitcalculations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stride_dist` double DEFAULT NULL,
@@ -1096,10 +937,6 @@ CREATE TABLE IF NOT EXISTS `gaitcalculations` (
   `time` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=71 ;
-
---
--- Dumping data for table `gaitcalculations`
---
 
 INSERT INTO `gaitcalculations` (`id`, `stride_dist`, `swing_time`, `stance_time`, `time`) VALUES
 (1, 0, 0, 0, 0),
@@ -1173,33 +1010,19 @@ INSERT INTO `gaitcalculations` (`id`, `stride_dist`, `swing_time`, `stance_time`
 (69, 0, 0, 0, 0),
 (70, 0, 0, 0, 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `injurycategories`
---
-
+DROP TABLE IF EXISTS `injurycategories`;
 CREATE TABLE IF NOT EXISTS `injurycategories` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `description` char(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
---
--- Dumping data for table `injurycategories`
---
-
 INSERT INTO `injurycategories` (`id`, `description`) VALUES
 (1, 'Hip'),
 (2, 'Knee'),
 (3, 'Ankle');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `injurytypes`
---
-
+DROP TABLE IF EXISTS `injurytypes`;
 CREATE TABLE IF NOT EXISTS `injurytypes` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `name` char(30) NOT NULL,
@@ -1207,10 +1030,6 @@ CREATE TABLE IF NOT EXISTS `injurytypes` (
   PRIMARY KEY (`id`),
   KEY `category` (`category`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
-
---
--- Dumping data for table `injurytypes`
---
 
 INSERT INTO `injurytypes` (`id`, `name`, `category`) VALUES
 (1, 'Total Hip Replacement', 1),
@@ -1252,12 +1071,7 @@ INSERT INTO `injurytypes` (`id`, `name`, `category`) VALUES
 (38, 'Foot', 4),
 (39, 'Toes', 4);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `notes`
---
-
+DROP TABLE IF EXISTS `notes`;
 CREATE TABLE IF NOT EXISTS `notes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` int(11) DEFAULT NULL,
@@ -1267,44 +1081,26 @@ CREATE TABLE IF NOT EXISTS `notes` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Dumping data for table `notes`
---
-
 INSERT INTO `notes` (`id`, `patient_id`, `Date`, `Subject`, `Note`) VALUES
 (1, 1, '2012-02-15 00:00:00', 'This is a SOAP Note', 'SOAP Notes are really cool and useful for doctors!  I''m writing this one to test them on our dashboard!');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `notifications`
---
-
+DROP TABLE IF EXISTS `notifications`;
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `doctor_id` mediumint(9) DEFAULT NULL,
-  `datetime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `datetime` datetime NOT NULL,
   `read` tinyint(1) DEFAULT NULL,
   `type` tinyint(1) DEFAULT NULL,
   `message` varchar(500) CHARACTER SET latin1 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=5 ;
 
---
--- Dumping data for table `notifications`
---
-
 INSERT INTO `notifications` (`id`, `doctor_id`, `datetime`, `read`, `type`, `message`) VALUES
 (1, 59, '2014-01-04 22:04:56', 0, 0, 'This is a normal message'),
 (2, 59, '2014-01-01 00:00:00', 0, 1, 'This is a warning message'),
 (3, 59, '2014-01-04 22:05:04', 1, 0, 'This is a normal message');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `patients`
---
-
+DROP TABLE IF EXISTS `patients`;
 CREATE TABLE IF NOT EXISTS `patients` (
   `user_id` int(11) NOT NULL,
   `provider_id` mediumint(9) DEFAULT NULL,
@@ -1331,10 +1127,6 @@ CREATE TABLE IF NOT EXISTS `patients` (
   KEY `user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `patients`
---
-
 INSERT INTO `patients` (`user_id`, `provider_id`, `mrn`, `start_date`, `end_date`, `extended`, `reg_date`, `processed_date`, `weight`, `height`, `pt`, `dr`, `injured_leg`, `times`, `phone_num`, `status_treatment`, `form_id`, `aob_accepted`, `ctt_accepted`, `pfp_accepted`) VALUES
 (62, 59, '123456789', '2014-01-01', '2014-03-14', 0, '2014-01-03', NULL, 200, '72', '', 'Mike Jones', 0, 3, '555555555', NULL, 0, NULL, NULL, NULL),
 (63, 59, '123456001', '2014-01-02', '2014-04-01', 0, '2014-01-05', NULL, 185, '69', 'Habil', 'Zod', 0, 3, '555555555', NULL, 0, NULL, NULL, NULL),
@@ -1342,112 +1134,101 @@ INSERT INTO `patients` (`user_id`, `provider_id`, `mrn`, `start_date`, `end_date
 (65, 59, '987654321', '2014-01-01', '2014-01-16', 0, '2014-01-06', NULL, 145, '62', 'S.T.A.R.S', 'Jack Kevorkian', 0, 1, '555555555', NULL, 0, NULL, NULL, NULL),
 (66, 59, '123123123', '2014-01-01', '2014-08-01', 0, '2014-01-06', NULL, 210, '74', 'John D Rockefeller', 'Andrew Carnegie', 0, 5, '555555555', NULL, 0, NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `protocols`
---
-
+DROP TABLE IF EXISTS `protocols`;
 CREATE TABLE IF NOT EXISTS `protocols` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_id` mediumint(9) NOT NULL,
-  `custom_exercise_id` mediumint(9) NOT NULL,
+  `exercise_id` mediumint(9) NOT NULL,
   `active` smallint(1) NOT NULL,
   `mandatory` smallint(1) DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
+  `reps` tinyint(2) unsigned NOT NULL,
+  `hold_time` mediumint(3) unsigned NOT NULL,
+  `weight` tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ClientID` (`patient_id`),
-  KEY `CExID` (`custom_exercise_id`)
+  KEY `CExID` (`exercise_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46582 ;
 
---
--- Dumping data for table `protocols`
---
+INSERT INTO `protocols` (`id`, `patient_id`, `exercise_id`, `active`, `mandatory`, `start_date`, `end_date`, `reps`, `hold_time`, `weight`) VALUES
+(1, 22, 27, 1, 0, '2012-05-10', '2014-03-13', 0, 0, 0),
+(2, 22, 2, 1, 0, '2012-05-10', '2014-03-13', 0, 0, 0),
+(385, 3, 332, 1, 1, '2012-10-30', NULL, 0, 0, 0),
+(384, 3, 331, 1, 0, '2012-10-30', NULL, 0, 0, 0),
+(383, 3, 330, 1, 0, '2012-10-30', NULL, 0, 0, 0),
+(6, 22, 25, 1, 0, '2012-05-10', '2013-11-04', 0, 0, 0),
+(7, 22, 24, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(8, 22, 28, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(382, 3, 329, 1, 0, '2012-10-30', NULL, 0, 0, 0),
+(10, 5, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(11, 5, 27, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(12, 5, 28, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(13, 5, 29, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(14, 6, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(15, 6, 27, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(16, 6, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(17, 6, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(18, 22, 2, 0, 0, '2012-05-10', NULL, 0, 0, 0),
+(19, 6, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(20, 6, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(21, 7, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(22, 7, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(23, 7, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(24, 7, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(25, 7, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(26, 7, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(27, 8, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(28, 8, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(29, 8, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(30, 8, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(31, 8, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(32, 8, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(33, 8, 1, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(34, 9, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(35, 9, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(36, 9, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(37, 9, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(38, 9, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(39, 9, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(40, 9, 1, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(41, 10, 26, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(42, 10, 27, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(43, 10, 28, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(44, 10, 29, 0, 0, '2012-04-18', NULL, 0, 0, 0),
+(45, 10, 2, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(46, 10, 4, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(47, 10, 1, 1, 0, '2012-04-18', NULL, 0, 0, 0),
+(48, 11, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(49, 11, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(50, 11, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(51, 11, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(52, 11, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(53, 11, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(54, 11, 1, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(55, 12, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(56, 12, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(57, 12, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(58, 12, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(59, 12, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(60, 12, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(61, 12, 1, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(62, 13, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(63, 13, 27, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(64, 13, 28, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(65, 13, 29, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(66, 13, 2, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(67, 13, 4, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(68, 13, 1, 1, 0, '2012-05-10', NULL, 0, 0, 0),
+(69, 14, 26, 1, 0, '2012-05-10', NULL, 0, 0, 0);
 
-INSERT INTO `protocols` (`id`, `patient_id`, `custom_exercise_id`, `active`, `mandatory`, `start_date`, `end_date`) VALUES
-(1, 22, 27, 0, 0, '2012-05-10', NULL),
-(2, 22, 2, 0, 0, '2012-05-10', NULL),
-(385, 3, 332, 1, 1, '2012-10-30', NULL),
-(384, 3, 331, 1, 0, '2012-10-30', NULL),
-(383, 3, 330, 1, 0, '2012-10-30', NULL),
-(6, 22, 25, 0, 0, '2012-05-10', NULL),
-(7, 22, 24, 0, 0, '2012-05-10', NULL),
-(8, 22, 28, 0, 0, '2012-05-10', NULL),
-(382, 3, 329, 1, 0, '2012-10-30', NULL),
-(10, 5, 26, 1, 0, '2012-05-10', NULL),
-(11, 5, 27, 0, 0, '2012-05-10', NULL),
-(12, 5, 28, 0, 0, '2012-05-10', NULL),
-(13, 5, 29, 0, 0, '2012-05-10', NULL),
-(14, 6, 26, 1, 0, '2012-05-10', NULL),
-(15, 6, 27, 0, 0, '2012-05-10', NULL),
-(16, 6, 28, 1, 0, '2012-05-10', NULL),
-(17, 6, 29, 1, 0, '2012-05-10', NULL),
-(18, 22, 2, 0, 0, '2012-05-10', NULL),
-(19, 6, 2, 1, 0, '2012-05-10', NULL),
-(20, 6, 4, 1, 0, '2012-05-10', NULL),
-(21, 7, 26, 1, 0, '2012-05-10', NULL),
-(22, 7, 27, 1, 0, '2012-05-10', NULL),
-(23, 7, 28, 1, 0, '2012-05-10', NULL),
-(24, 7, 29, 1, 0, '2012-05-10', NULL),
-(25, 7, 2, 1, 0, '2012-05-10', NULL),
-(26, 7, 4, 1, 0, '2012-05-10', NULL),
-(27, 8, 26, 1, 0, '2012-05-10', NULL),
-(28, 8, 27, 1, 0, '2012-05-10', NULL),
-(29, 8, 28, 1, 0, '2012-05-10', NULL),
-(30, 8, 29, 1, 0, '2012-05-10', NULL),
-(31, 8, 2, 1, 0, '2012-05-10', NULL),
-(32, 8, 4, 1, 0, '2012-05-10', NULL),
-(33, 8, 1, 1, 0, '2012-05-10', NULL),
-(34, 9, 26, 1, 0, '2012-05-10', NULL),
-(35, 9, 27, 1, 0, '2012-05-10', NULL),
-(36, 9, 28, 1, 0, '2012-05-10', NULL),
-(37, 9, 29, 1, 0, '2012-05-10', NULL),
-(38, 9, 2, 1, 0, '2012-05-10', NULL),
-(39, 9, 4, 1, 0, '2012-05-10', NULL),
-(40, 9, 1, 1, 0, '2012-05-10', NULL),
-(41, 10, 26, 1, 0, '2012-04-18', NULL),
-(42, 10, 27, 1, 0, '2012-04-18', NULL),
-(43, 10, 28, 1, 0, '2012-04-18', NULL),
-(44, 10, 29, 0, 0, '2012-04-18', NULL),
-(45, 10, 2, 1, 0, '2012-04-18', NULL),
-(46, 10, 4, 1, 0, '2012-04-18', NULL),
-(47, 10, 1, 1, 0, '2012-04-18', NULL),
-(48, 11, 26, 1, 0, '2012-05-10', NULL),
-(49, 11, 27, 1, 0, '2012-05-10', NULL),
-(50, 11, 28, 1, 0, '2012-05-10', NULL),
-(51, 11, 29, 1, 0, '2012-05-10', NULL),
-(52, 11, 2, 1, 0, '2012-05-10', NULL),
-(53, 11, 4, 1, 0, '2012-05-10', NULL),
-(54, 11, 1, 1, 0, '2012-05-10', NULL),
-(55, 12, 26, 1, 0, '2012-05-10', NULL),
-(56, 12, 27, 1, 0, '2012-05-10', NULL),
-(57, 12, 28, 1, 0, '2012-05-10', NULL),
-(58, 12, 29, 1, 0, '2012-05-10', NULL),
-(59, 12, 2, 1, 0, '2012-05-10', NULL),
-(60, 12, 4, 1, 0, '2012-05-10', NULL),
-(61, 12, 1, 1, 0, '2012-05-10', NULL),
-(62, 13, 26, 1, 0, '2012-05-10', NULL),
-(63, 13, 27, 1, 0, '2012-05-10', NULL),
-(64, 13, 28, 1, 0, '2012-05-10', NULL),
-(65, 13, 29, 1, 0, '2012-05-10', NULL),
-(66, 13, 2, 1, 0, '2012-05-10', NULL),
-(67, 13, 4, 1, 0, '2012-05-10', NULL),
-(68, 13, 1, 1, 0, '2012-05-10', NULL),
-(69, 14, 26, 1, 0, '2012-05-10', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `providers`
---
-
+DROP TABLE IF EXISTS `providers`;
 CREATE TABLE IF NOT EXISTS `providers` (
   `user_id` int(11) NOT NULL,
   `npin` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `business_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `business_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `phone_num` varchar(9) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `phone_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `cell_num` varchar(9) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `registration_date` date NOT NULL,
   `processed_date` date DEFAULT NULL,
@@ -1455,29 +1236,20 @@ CREATE TABLE IF NOT EXISTS `providers` (
   KEY `fk_user_id` (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `providers`
---
-
 INSERT INTO `providers` (`user_id`, `npin`, `business_name`, `business_address`, `phone_num`, `cell_num`, `registration_date`, `processed_date`) VALUES
 (59, '123456', 'MedHab', '26 Amberwood Drive', '317512645', NULL, '0000-00-00', NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `romcalculations`
---
-
+DROP TABLE IF EXISTS `romcalculations`;
 CREATE TABLE IF NOT EXISTS `romcalculations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `average` double DEFAULT NULL,
   `minimum` decimal(6,0) DEFAULT NULL,
   `maximum` double DEFAULT NULL,
-  `reps` int(11) DEFAULT NULL,
   `time` int(11) DEFAULT NULL,
+  `reps` int(11) DEFAULT NULL,
   `rep_average` double DEFAULT NULL,
-  `rep_min` double DEFAULT NULL,
   `rep_max` double DEFAULT NULL,
+  `rep_min` double DEFAULT NULL,
   `force1` double DEFAULT NULL,
   `force2` double DEFAULT NULL,
   `force3` double DEFAULT NULL,
@@ -1485,34 +1257,25 @@ CREATE TABLE IF NOT EXISTS `romcalculations` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=734 ;
 
---
--- Dumping data for table `romcalculations`
---
+INSERT INTO `romcalculations` (`id`, `average`, `minimum`, `maximum`, `time`, `reps`, `rep_average`, `rep_max`, `rep_min`, `force1`, `force2`, `force3`, `force4`) VALUES
+(1, 16.8, '111', 333, 5, 4, 6, 8, 7, 3.7, 3.9, 13.4, 10.2),
+(2, 23.1, '22', 38.6, 8, 7, 9, 9, 1, 23.1, 3.2, 13.4, 29),
+(3, 16.8, '111', 333, 5, 4, 6, 8, 7, 3.7, 3.9, 13.4, 10.2),
+(4, 23.1, '22', 38.6, 8, 7, 9, 9, 1, 23.1, 4.5, 13.4, 29),
+(117, 59.862523021901, '30', 71.270328752098, 113, 10, 6.02, 6.5, 5.1, 18.848012170339, 0, 0, 1.0287978330513),
+(118, 62.604043266296, '25', 74.207889721736, 126, 10, 8.03, 8.7, 7.4, 65.830166298943, 0, 0, 0),
+(119, 62.900117167756, '26', 74.637660375383, 126, 10, 7.95, 8.7, 7.4, 65.830166298943, 0, 0, 0),
+(120, 59.505500697424, '29', 70.978206728635, 113, 10, 6.15, 6.7, 5.3, 18.848012170339, 0, 0, 1.0287978330513),
+(160, 18.277405634459, '7', 29.048664281625, 83, 14, 2.75, 4.3, 0.9, 42.77684338467, 1.4796243341301, 1.4796243341301, 1.7883514704511),
+(121, 17.170285417224, '6', 23.764641414203, 100, 10, 4.39, 4.5, 4.2, 23.260972600377, 3.5017224931896, 3.5017224931896, 8.7257497453818),
+(122, 19.0271821547, '7', 26.473069446154, 100, 10, 4.44, 4.6, 4.3, 36.038179997515, 4.4214592027075, 4.4214592027075, 4.9713735352884),
+(123, 16.295376580993, '7', 19.885163334379, 100, 10, 4.35, 4.7, 4, 25.084987522345, 8.498633224904, 8.498633224904, 14.047280227196),
+(124, 19.38202006516, '7', 23.234430465564, 100, 10, 4.46, 4.9, 4.2, 20.610796105931, 6.7486907845077, 6.7486907845077, 8.124160931442),
+(125, 20.450689731438, '7', 43.323761767921, 99, 11, 3.6636363636364, 4.3, 0.6, 3.6758631425321, 13.408402905844, 13.408402905844, 10.20399262538),
+(126, 24.321654057805, '9', 50.424363478125, 100, 10, 4.16, 5.1, 3.9, 23.117289471921, 13.398759615911, 13.398759615911, 29.029613242267),
+(127, 25.655575180463, '8', 35.63281815359, 97, 10, 4.27, 5, 3.5, 1.6907446603409, 16.82765555651, 16.82765555651, 12.391556739832);
 
-INSERT INTO `romcalculations` (`id`, `average`, `minimum`, `maximum`, `reps`, `time`, `rep_average`, `rep_min`, `rep_max`, `force1`, `force2`, `force3`, `force4`) VALUES
-(1, 16.8, '111', 333, 4, 5, 6, 7, 8, 3.7, 3.9, 13.4, 10.2),
-(2, 23.1, '22', 38.6, 7, 8, 9, 1, 9, 23.1, 3.2, 13.4, 29),
-(3, 16.8, '111', 333, 4, 5, 6, 7, 8, 3.7, 3.9, 13.4, 10.2),
-(4, 23.1, '22', 38.6, 7, 8, 9, 1, 9, 23.1, 4.5, 13.4, 29),
-(117, 59.862523021901, '30', 71.270328752098, 10, 113, 6.02, 5.1, 6.5, 18.848012170339, 0, 0, 1.0287978330513),
-(118, 62.604043266296, '25', 74.207889721736, 10, 126, 8.03, 7.4, 8.7, 65.830166298943, 0, 0, 0),
-(119, 62.900117167756, '26', 74.637660375383, 10, 126, 7.95, 7.4, 8.7, 65.830166298943, 0, 0, 0),
-(120, 59.505500697424, '29', 70.978206728635, 10, 113, 6.15, 5.3, 6.7, 18.848012170339, 0, 0, 1.0287978330513),
-(160, 18.277405634459, '7', 29.048664281625, 14, 83, 2.75, 0.9, 4.3, 42.77684338467, 1.4796243341301, 1.4796243341301, 1.7883514704511),
-(121, 17.170285417224, '6', 23.764641414203, 10, 100, 4.39, 4.2, 4.5, 23.260972600377, 3.5017224931896, 3.5017224931896, 8.7257497453818),
-(122, 19.0271821547, '7', 26.473069446154, 10, 100, 4.44, 4.3, 4.6, 36.038179997515, 4.4214592027075, 4.4214592027075, 4.9713735352884),
-(123, 16.295376580993, '7', 19.885163334379, 10, 100, 4.35, 4, 4.7, 25.084987522345, 8.498633224904, 8.498633224904, 14.047280227196),
-(124, 19.38202006516, '7', 23.234430465564, 10, 100, 4.46, 4.2, 4.9, 20.610796105931, 6.7486907845077, 6.7486907845077, 8.124160931442),
-(125, 20.450689731438, '7', 43.323761767921, 11, 99, 3.6636363636364, 0.6, 4.3, 3.6758631425321, 13.408402905844, 13.408402905844, 10.20399262538),
-(126, 24.321654057805, '9', 50.424363478125, 10, 100, 4.16, 3.9, 5.1, 23.117289471921, 13.398759615911, 13.398759615911, 29.029613242267),
-(127, 25.655575180463, '8', 35.63281815359, 10, 97, 4.27, 3.5, 5, 1.6907446603409, 16.82765555651, 16.82765555651, 12.391556739832);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `serial`
---
-
+DROP TABLE IF EXISTS `serial`;
 CREATE TABLE IF NOT EXISTS `serial` (
   `serial_number` bigint(12) NOT NULL,
   `macl` varchar(12) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -1522,10 +1285,6 @@ CREATE TABLE IF NOT EXISTS `serial` (
   `patient_id` mediumint(9) NOT NULL COMMENT 'patient to which the sn is assigned',
   PRIMARY KEY (`serial_number`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `serial`
---
 
 INSERT INTO `serial` (`serial_number`, `macl`, `macr`, `timestamp`, `admin_id`, `patient_id`) VALUES
 (100000000000, '0', '0', '2013-12-31 19:41:31', 0, 0),
@@ -1538,12 +1297,7 @@ INSERT INTO `serial` (`serial_number`, `macl`, `macr`, `timestamp`, `admin_id`, 
 (100000000007, '0', '0', '2013-12-31 19:41:47', 0, 0),
 (100000000008, '0', '0', '2013-12-31 19:41:49', 0, 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `sessions`
---
-
+DROP TABLE IF EXISTS `sessions`;
 CREATE TABLE IF NOT EXISTS `sessions` (
   `session_id` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `ip_address` varchar(45) COLLATE utf8_bin NOT NULL DEFAULT '0',
@@ -1554,20 +1308,13 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `sessions`
---
-
 INSERT INTO `sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('8c817e607992c98529b556f22266d1e9', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1388997150, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:20:"dashboard/dashboards";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}'),
-('c8d1dbb250716752be4368a0305cefb3', '::1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko', 1388997792, 'a:7:{s:9:"user_data";s:0:"";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";s:10:"patient_id";s:2:"62";}');
+('51f4e5ebe93f7c2cedf252b493ca909f', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1389046180, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:15:"account/account";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}'),
+('57a4b8e67760f03fb31d919905560f55', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1389044727, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:15:"account/account";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}'),
+('612c7926591526789c336819330b272b', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1389045577, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:20:"dashboard/dashboards";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}'),
+('c234a33679b49f048bd216352229f6ab', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.63 Safari/537.36', 1389048912, 'a:7:{s:9:"user_data";s:0:"";s:9:"last_page";s:20:"dashboard/dashboards";s:9:"logged_in";b:1;s:7:"user_id";s:2:"59";s:9:"user_type";s:1:"1";s:10:"first_name";s:7:"Matthew";s:9:"last_name";s:8:"Stephens";}');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `standard_emails`
---
-
+DROP TABLE IF EXISTS `standard_emails`;
 CREATE TABLE IF NOT EXISTS `standard_emails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET latin1 NOT NULL,
@@ -1576,10 +1323,6 @@ CREATE TABLE IF NOT EXISTS `standard_emails` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
 
---
--- Dumping data for table `standard_emails`
---
-
 INSERT INTO `standard_emails` (`id`, `name`, `subject`, `content`) VALUES
 (1, 'emailD', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum, nulla in vestibulum dapibus, diam sem laoreet risus, sed rutrum dui justo eu lorem. Aliquam fermentum viverra lorem, et imperdiet.'),
 (2, 'emailE', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non metus quis mi vulputate adipiscing. Aliquam erat volutpat. Maecenas consectetur. '),
@@ -1587,12 +1330,7 @@ INSERT INTO `standard_emails` (`id`, `name`, `subject`, `content`) VALUES
 (4, 'emailG', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet augue vitae arcu bibendum laoreet. Integer blandit imperdiet pretium. \n\nDuis at lorem mi. Curabitur non pretium diam. Vivamus volutpat semper consequat. Sed sit amet justo ipsum. Etiam rutrum odio sed quam fermentum tristique commodo dolor mattis. Ut elementum interdum dolor, non congue mauris eleifend vitae. Fusce elementum bibendum euismod. \n\nPellentesque sit amet nunc ut magna malesuada consequat. Aliquam at imperdiet mauris.  Nunc at arcu nisi. In hac habitasse platea dictumst. \n\nClass aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam ornare tincidunt turpis, at aliquam. '),
 (5, 'emailH', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet augue vitae arcu bibendum laoreet. Integer blandit imperdiet pretium.');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `stepcalculations`
---
-
+DROP TABLE IF EXISTS `stepcalculations`;
 CREATE TABLE IF NOT EXISTS `stepcalculations` (
   `step_num` int(11) DEFAULT NULL,
   `gait_id` int(11) DEFAULT NULL,
@@ -1602,10 +1340,6 @@ CREATE TABLE IF NOT EXISTS `stepcalculations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=193 ;
-
---
--- Dumping data for table `stepcalculations`
---
 
 INSERT INTO `stepcalculations` (`step_num`, `gait_id`, `stride_dist`, `swing_time`, `stance_time`, `id`) VALUES
 (1, 3, 12.1624, 13.16, 9.48, 1),
@@ -1623,12 +1357,7 @@ INSERT INTO `stepcalculations` (`step_num`, `gait_id`, `stride_dist`, `swing_tim
 (4, 7, 314.675, 11.76, 4.64, 13),
 (1, 8, -923.706, 30.52, 21.4, 14);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
@@ -1641,34 +1370,21 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=67 ;
 
---
--- Dumping data for table `users`
---
-
 INSERT INTO `users` (`id`, `type`, `first_name`, `last_name`, `password`, `email`, `active`) VALUES
 (59, 1, 'Matthew', 'Stephens', 'i2i4+/gvXJKPAxBFvLaq8zcnuy+JJJ9/', 'mcstephens@gmail.com', 1),
 (62, 2, 'Billy', 'Bob', 'bMriH7E3WWIQeSTqml7Y0XoEh6xshSvY', 'billybob@web.com', 1),
 (63, 2, 'Jane', 'Doe', 'NOnagN2E43tlLhHES9EnYQ==', 'jane@doe.com', 1),
 (64, 2, 'Ada', 'Lovelace', 'GM+ArjVdSvyhByv4P3PitA==', 'ada@lovelace.com', 1),
-(65, 2, 'Linus', 'Torvolds', 'OZYp5tg41ykd1/jdv2XG5Q==', 'linus@torvolds.com', 0),
+(65, 2, 'Linus', 'Torvolds', 'OZYp5tg41ykd1/jdv2XG5Q==', 'linus@torvolds.com', 1),
 (66, 2, 'Herman', 'Hollerith', 'U5QmeyKZIfftn6p9Q58Vmw==', 'herman@hollerith.com', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user_type`
---
-
+DROP TABLE IF EXISTS `user_type`;
 CREATE TABLE IF NOT EXISTS `user_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(32) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `type` (`type`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=3 ;
-
---
--- Dumping data for table `user_type`
---
 
 INSERT INTO `user_type` (`id`, `type`) VALUES
 (2, 'patient'),

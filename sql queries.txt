@@ -1,0 +1,12 @@
+GET EXERCISES:
+
+select protocols.*, exercises.name AS name from protocols LEFT JOIN exercises ON (exercises.id = protocols.exercise_id) where protocols.patient_id = 22 AND protocols.active = 1 AND protocols.end_date > CURRENT_DATE
+
+
+GET DATA FOR EXERCISE:
+
+SELECT * FROM `activities` 
+left JOIN romcalculations ON (left_calc = romcalculations.id ) 
+LEFT JOIN exercises ON activities.exercise_id = exercises.id 
+LEFT JOIN protocols ON activities.protocol_id = protocols.id
+WHERE protocols.id = 1

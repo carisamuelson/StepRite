@@ -342,7 +342,7 @@ input[type=submit]:active, .button:active {
 }
 
 #tabs .left {
-	width: 580px;
+	width: 27%;
 	display: inline-block;
 	margin: 10px 0px 10px 10px;
 	padding: 10px;
@@ -350,10 +350,23 @@ input[type=submit]:active, .button:active {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+	float: left;
+}
+
+#tabs .center {
+	width: 33%;
+	display: inline-block;
+	margin: 10px 0px 0px 10px;
+	padding: 10px;
+	border: #000000 1px solid;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	float: left;
 }
 
 #tabs .right {
-	width: 400px;
+	width: 27%;
 	display: inline-block;
 	margin: 10px;
 	padding: 10px;
@@ -361,6 +374,7 @@ input[type=submit]:active, .button:active {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
+	float: right;
 }
 
 /* tables */

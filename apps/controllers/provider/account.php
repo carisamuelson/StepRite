@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /***************************************************************************
 |--------------------------------------------------------------------------
-| View_patients
+| Account
 |--------------------------------------------------------------------------
 |
 | Written by Matthew C. Stephens for MedHab, LLC.
@@ -9,7 +9,12 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class View_patients extends Custom_Controller {
+class Account extends StepRite_Controller {
+	function __construct() {
+		parent::__construct();
+		$this->user->provider_logged_in();
+		$this->load->model('user_model');
+	}
 	/***************************************************************************
 	|--------------------------------------------------------------------------
 	| Index
@@ -18,12 +23,23 @@ class View_patients extends Custom_Controller {
 	| Displays the start information related to this class
 	|
 	***************************************************************************/	
-	function index() {
+	public function index() {
+		$provider = $this->user_model->get_provider_by_id($this->session->userdata('user_id'));
+
+		if($provider) {
+			$data['provider'] = $provider;
+		}
+		else {
+			$data['provider'] = "";
+		}
+		
+		
+		$data['success'] = "";
 		/************************/
 		/*    Load File View    */
 		/************************/
-		$data['header_info'] = "Under Construction";
-		$data['view'] = 'account/view_patients';
+		$data['header_info'] = "Account Page - Welcome " . $this->session->userdata('first_name') . " " . $this->session->userdata('last_name');
+		$data['view'] = 'provider/account';
 		$this->load->view('init', $data);
 	}
 }

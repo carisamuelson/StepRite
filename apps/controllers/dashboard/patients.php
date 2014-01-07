@@ -9,9 +9,10 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class patients extends Custom_Controller {
+class patients extends StepRite_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->user->provider_logged_in();
 		$this->load->model('user_model');
 	}
 
@@ -34,7 +35,6 @@ class patients extends Custom_Controller {
 		else {
 			echo "You've successfully updated your patient with id = " . $this->input->post('id');
 			echo "<br/><br/>";
-			echo "If you would like to update this patient again, you must refresh the page";
 		}
 	}
 }

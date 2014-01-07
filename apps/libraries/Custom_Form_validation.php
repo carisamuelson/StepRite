@@ -16,15 +16,14 @@ class Custom_Form_validation extends StepRite_Form_validation {
         parent::__construct();
     }
 
-    // --------------------------------------------------------------------
-
-    /**
-     * Valid Date (ISO format)
-     *
-     * @access    public
-     * @param    string
-     * @return    bool
-     */
+	/***************************************************************************
+	|--------------------------------------------------------------------------
+	| valid_date
+	|--------------------------------------------------------------------------
+	| @access	public
+	| @param	string
+	| @return	bool
+	***************************************************************************/	
     function valid_date($date)
     {
         if (!empty($date))
@@ -43,5 +42,36 @@ class Custom_Form_validation extends StepRite_Form_validation {
             }
         }
         return FALSE;
-    } 
+    }
+	/***************************************************************************
+	|--------------------------------------------------------------------------
+	| _verify_Login
+	|--------------------------------------------------------------------------
+	| @access	public protected
+	| @param	string
+	| @return	bool
+	***************************************************************************/		
+	function _verify_login($password, $email) {
+		$user = $this->user_model->get_user($email);
+		
+		if(!$user) {
+			$this->form_validation->set_message('_verify_login', 'The email entered is invalid');
+			return FALSE;
+		}
+		else {
+			if($password != $this->encrypt->decode($user['password'])) {
+				$this->form_validation->set_message('_verify_login', 'The password entered is invalid');
+				return FALSE;
+			}
+			if(!$user['active']) {
+				$this->form_validation->set_message('_verify_login', 'The account is not active. Please wait for customer service to contact you to active your account. Thank you');
+				return FALSE;
+			}
+		}
+		
+		$this->load->library('user');
+		$this->user->login($email, $password);
+		
+		return TRUE;
+	}	
 }

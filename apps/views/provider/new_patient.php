@@ -143,7 +143,7 @@
 	<div class="right-box">
 		<ul>
 			<li><?php echo anchor('account/new_patient', 'Register New Patient'); ?></li>
-			<?php /* <li><?php echo anchor('account/account/edit_information', 'Change Personal Information'); ?></li> */ ?>
+			<?php /* <li><?php echo anchor('provider/account/edit_information', 'Change Personal Information'); ?></li> */ ?>
 			<li><?php echo anchor('account/change_password', 'Change Your Password'); ?></li>
 		</ul>
 	</div>

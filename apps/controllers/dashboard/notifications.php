@@ -9,9 +9,10 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class notifications extends Custom_Controller {
+class notifications extends StepRite_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->user->provider_logged_in();
 	}
 
 	public function index() {

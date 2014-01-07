@@ -17,8 +17,6 @@ class test extends StepRite_Controller {
 	public function index() {
 		$this->load->library('user');
 		
-		
-		
 		if($id = $this->user->is_valid($email, $password)) {
 			/* Do something with $id */
 		}

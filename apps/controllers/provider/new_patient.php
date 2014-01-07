@@ -9,8 +9,12 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class New_patient extends Custom_Controller {
-
+class New_patient extends StepRite {
+	function __construct() {
+		parent::__construct();
+		$this->user->provider_logged_in();
+		$this->load->model('user_model');
+	}
 	/***************************************************************************
 	|--------------------------------------------------------------------------
 	| Index
@@ -59,14 +63,13 @@ class New_patient extends Custom_Controller {
 				'pt'				=> $this->input->post('pt'),
 				);
 		
-			$this->load->model('user_model');
 			$this->user_model->insert_patient($user_data, $patient_data);
 
 			/************************/
 			/*    Load File View    */
 			/************************/
 			$this->session->set_userdata('notice', 'Thank you for registering your new patient. We will validate the information provided before the patient is activated');
-			redirect('account/account', 'refresh');
+			redirect('provider/account', 'refresh');
 		}
 		else {
 			/************************/

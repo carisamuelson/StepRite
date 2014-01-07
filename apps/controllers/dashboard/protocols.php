@@ -9,10 +9,11 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class protocols extends Custom_Controller {
+class protocols extends StepRite_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->model('dashboard_model');
+		$this->user->provider_logged_in();
 	}
 
 	public function index() {

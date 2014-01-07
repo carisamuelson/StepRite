@@ -1,0 +1,4 @@
+<img src="<?php echo base_url() . "images/icon_printer.gif"?>">
+<a href="javascript: window.print();">Print</a>
+" | "
+<a href="javascript: window.close();">Close</a>

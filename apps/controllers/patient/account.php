@@ -13,10 +13,7 @@ class account extends StepRite_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		if(!$this->session->userdata('logged_in') || $this->session->userdata('user_type') != 2) {
-			redirect('login', 'refresh');
-		}
-		
+		$this->user->patient_logged_in();
 		$this->load->model('user_model');
 	}
 	

@@ -36,7 +36,7 @@ class Change_password extends StepRite_Controller {
 			/*    Load File View    */
 			/************************/
 			$this->session->set_userdata('notice', 'Your password has been updated');
-			redirect('account/account', 'refresh');
+			redirect('provider/account', 'refresh');
 		}
 	}
 	/***************************************************************************

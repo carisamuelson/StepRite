@@ -31,7 +31,7 @@
 <div id="header-bar">
 	<ul>
 		<?php if($this->session->userdata('logged_in') && $this->session->userdata('user_type') == 1) { ?>
-			<li><a href="<?php echo base_url() . "account/account";?>">Account</a></li>
+			<li><a href="<?php echo base_url() . "provider/account";?>">Account</a></li>
 			<li><a href="<?php echo base_url() . "dashboard/dashboards";?>">Dashboards</a></li>
 			<li><a href="<?php echo base_url() . "logout";?>">Logout</a></li>
 		<?php } else if($this->session->userdata('logged_in') && $this->session->userdata('user_type') == 2) {?>

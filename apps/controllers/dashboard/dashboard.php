@@ -9,9 +9,10 @@
 | All information included is copyrighted MedHab, LLC 2013
 |
 ***************************************************************************/
-class dashboard extends Custom_Controller {
+class dashboard extends StepRite_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->user->provider_logged_in();
 		$this->load->model('dashboard_model');
 	}
 

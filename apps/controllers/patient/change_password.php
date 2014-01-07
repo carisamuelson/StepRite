@@ -13,7 +13,7 @@ class Change_password extends StepRite_Controller {
 	
 	function __construct() {
 		parent::__construct();
-
+		$this->user->patient_logged_in();
 		$this->load->model('user_model');
 	}
 	

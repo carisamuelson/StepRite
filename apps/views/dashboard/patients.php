@@ -46,7 +46,15 @@ $(document).ready(function() {
 	// toggle the hidden edit patient form on and off
 	$(".toggle-edit").click(function() {
 		var id = $(this).attr('id');
-		$('.edit-form.' + id).toggle( "slow", function() {});
+			if ($('.edit-form.' + id).is(':visible')) {
+				$('.edit-form.' + id).slideUp("slow");
+				
+				var current_index = $("#tabs").tabs("option","active"); 
+				$("#tabs").tabs('load',current_index);
+			}
+			else {
+				$('.edit-form.' + id).slideDown(1000);
+			}
 	});
 	// Update function
 	$('.update').click(function() {

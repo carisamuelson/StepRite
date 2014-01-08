@@ -74,4 +74,19 @@ class Custom_Form_validation extends StepRite_Form_validation {
 		
 		return TRUE;
 	}	
+	
+	/***************************************************************************
+	|--------------------------------------------------------------------------
+	| clear_field_data
+	|--------------------------------------------------------------------------
+	| @access	public
+	| @return	class Custom_Form_validation
+	***************************************************************************/		
+	
+	function clear_field_data() 
+	{
+		$this->_field_data = array();
+		$this->_error_array = array();
+		return $this;
+	}
 }
